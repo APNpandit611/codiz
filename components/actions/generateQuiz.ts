@@ -47,14 +47,8 @@ Return ONLY the final JSON object.
 
     try {
         const completion = await openai.chat.completions.create({
-            // model: "nvidia/nemotron-nano-12b-v2-vl:free",
             model: "kwaipilot/kat-coder-pro:free",
-            messages: [
-                {
-                    role: "user",
-                    content: prompt,
-                },
-            ],
+            messages: [{ role: "user", content: prompt }],
         });
 
         const content = completion.choices[0].message?.content;
