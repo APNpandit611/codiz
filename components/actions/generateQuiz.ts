@@ -55,7 +55,7 @@ Example for "easy" difficulty (do not use this content, only for structure refer
 Now, please generate a new coding challenge based on the instructions above. Make sure to just generate quiz as an output. Without any intro text or similar text. Try to be unique everytime. Do not use similar question or repetetive question`;
     try {
         const completion = await openai.chat.completions.create({
-            model: "nvidia/nemotron-nano-12b-v2-vl:free",
+            model: "google/gemini-2.0-flash-exp:free",
             messages: [{ role: "user", content: prompt }],
         });
 
