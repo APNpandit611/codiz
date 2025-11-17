@@ -2,6 +2,11 @@
 import Quiz from "@/components/Quiz";
 import React, { useState } from "react";
 import generateQuiz, { type QuizData } from "@/components/actions/generateQuiz";
+import {
+    getDailyLimit,
+    incrementDailyLimit,
+} from "@/components/actions/quizLimit";
+import ChallengesRemaining from "@/components/ChallangesRemaining";
 
 export default function Home() {
     const [quiz, setQuiz] = useState<QuizData | null>(null);
@@ -9,11 +14,19 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const generateQuizHandler = async() => {
+    const generateQuizHandler = async () => {
+        const limitData = getDailyLimit();
+        const MAX = 15;
+
+        if (limitData.count >= MAX) {
+            setError("You reached today's limit.");
+            return;
+        }
         setIsLoading(true);
         setError(null);
         try {
             const generatedQuiz = await generateQuiz(difficulty);
+            incrementDailyLimit();
             setQuiz(generatedQuiz); // Set the result
         } catch (err) {
             console.log(err);
@@ -31,7 +44,7 @@ export default function Home() {
     // You could even remove the form and button if you want the quiz to generate on select change.
     const handleGenerate = async (e: React.FormEvent) => {
         e.preventDefault();
-        generateQuizHandler()
+        generateQuizHandler();
     };
 
     return (
@@ -43,7 +56,7 @@ export default function Home() {
                     </h1>
                     <div className="bg-slate-100 p-4 rounded-sm">
                         <span className="text-sm text-gray-600">
-                            Challenges remaining today: 2
+                            <ChallengesRemaining />
                         </span>
                     </div>
                     <label htmlFor="level" className="text-sm font-medium">
@@ -65,7 +78,6 @@ export default function Home() {
                     <button className="w-fit bg-indigo-600 text-white p-2 rounded-md text-sm px-5 hover:bg-indigo-700 transition-colors flex items-center justify-center gap-2">
                         {isLoading ? "Generating..." : "Generate Challenge"}
                     </button>
-                    
                 </form>
                 <Quiz
                     quizData={quiz}
@@ -73,8 +85,6 @@ export default function Home() {
                     error={error}
                     generateNextQuiz={generateQuizHandler}
                 />
-
-                
             </main>
         </>
     );
