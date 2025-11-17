@@ -56,7 +56,23 @@ Now, please generate a new coding challenge based on the instructions above. Mak
     try {
         const completion = await openai.chat.completions.create({
             model: "google/gemini-2.0-flash-exp:free",
-            messages: [{ role: "user", content: prompt }],
+            messages: [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": prompt,
+            },
+            {
+              "type": "image_url",
+              "image_url": {
+                "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg"
+              }
+            }
+          ]
+        }
+      ],
         });
 
         const content = completion.choices[0].message?.content;
