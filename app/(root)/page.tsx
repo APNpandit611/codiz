@@ -82,7 +82,7 @@ export default function Home() {
                                 : "Challenges remaining today: Loading..."}
                         </span>
                     </div>
-                    <label htmlFor="level" className="text-sm font-medium">
+                    <label htmlFor="language" className="text-sm font-medium">
                         Select Language:
                     </label>
 
@@ -112,7 +112,7 @@ export default function Home() {
                     <select
                         value={formData.difficulty}
                         onChange={handleFormChange} // This change triggers the re-render and the quiz's useEffect
-                        name="level"
+                        name="difficulty"
                         id="level"
                         className="bg-slate-100 p-4 pr-10 rounded-sm text-sm cursor-pointer border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                     >
