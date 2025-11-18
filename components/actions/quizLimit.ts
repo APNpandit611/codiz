@@ -1,4 +1,3 @@
-const DAILY_LIMIT = 5;
 const STORAGE_KEY = "quiz_count_data";
 
 export function getDailyLimit() {
@@ -9,6 +8,7 @@ export function getDailyLimit() {
 
     const today = new Date().toDateString();
     const stored = localStorage.getItem(STORAGE_KEY);
+    
 
     if (!stored) {
         const data = { date: today, count: 0 };
@@ -27,6 +27,7 @@ export function getDailyLimit() {
     return data;
 }
 
+
 export function incrementDailyLimit() {
     if (typeof window === "undefined") return;
 
@@ -34,3 +35,5 @@ export function incrementDailyLimit() {
     data.count += 1;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
+
+

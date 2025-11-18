@@ -20,7 +20,7 @@ const Quiz = ({
         number | null
     >(null);
     // State to show whether the user has submitted their answer
-    const [showResult, setShowResult] = useState(false);
+    const [showResult, setShowResult] = useState<boolean>(false);
 
     useEffect(() => {
         const resetSelectedChoice = () => {
@@ -28,6 +28,7 @@ const Quiz = ({
             setShowResult(false);
         };
         resetSelectedChoice();
+
     }, [quizData]);
 
     // --- Helper Functions ---

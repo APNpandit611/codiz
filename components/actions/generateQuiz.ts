@@ -17,13 +17,16 @@ export type QuizData = {
     explanation: string;
 };
 
-const generateQuiz = async (difficulty: string): Promise<QuizData> => {
+const generateQuiz = async (difficulty: string, language: string): Promise<QuizData> => {
     const prompt = `
-Generate a multiple-choice JavaScript coding challenge. 
+Generate a multiple-choice coding challenge based on the language provided and the difficulty level. 
 Respond with a **single valid JSON object only**. 
 No markdown fences, no extra text, no comments, no trailing commas. 
 All strings must be valid JSON strings (escape quotes and newlines). 
-The JS code snippet must be escaped correctly.
+The code snippet must be escaped correctly.
+Focus on common algorithm, data structure, or practical coding problem.
+Focus more on DSA for medium and hard levels.
+Be more interview-oriented.
 
 Required JSON structure:
 {
@@ -35,8 +38,12 @@ Required JSON structure:
 }
 
 Rules:
-- Topic: common algorithm, data structure, or practical coding problem.
-- Difficulty: "${difficulty}" (easy = basic logic; medium = algorithms; hard = advanced structures/performance).
+- Topic: data structure, practical coding problem, interview-oriented coding problems.
+- Difficulty: "${difficulty}" (easy = fundamental and core concepts logic; medium = DSA algorithms; hard = advanced structures/performance/architecture).
+- Language: "${language}".
+- Question must be clear and concise.
+- Code snippet must be relevant to the question.
+- Only one choice is correct.
 - Choices must be plausible.
 - Explanation must justify the correct answer and contrast the wrong ones.
 - Must be unique and non-repetitive.
