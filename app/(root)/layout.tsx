@@ -11,6 +11,7 @@ export default function HomeLayout({
     return (
         <div>
             <Navbar />
+            <p>hello</p>
             {children}
             <ToastContainer position="bottom-right" theme="dark"/>
         </div>
