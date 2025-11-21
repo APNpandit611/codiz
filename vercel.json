@@ -1,27 +1,14 @@
 {
-  "buildCommand": "prisma generate && next build",
-  "installCommand": "npm install && prisma generate",
-  "framework": "nextjs",
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/next"
+      "src": "./index.js",
+      "use": "@vercel/node"
     }
   ],
-  "functions": {
-    "app/api/**/*.ts": {
-      "maxDuration": 30,
-      "memory": 512
-    }
-  },
-  "env": {
-    "PRISMA_GENERATE_DATAPROXY": "true",
-    "NODE_ENV": "production"
-  },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
+      "src": "/(.*)",
+      "dest": "/"
     }
   ]
 }
