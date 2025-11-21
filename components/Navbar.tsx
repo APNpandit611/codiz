@@ -52,30 +52,39 @@ const Navbar = async () => {
                         </span>
                         <div className="h-[1px] w-full bg-indigo-600 scale-x-0 transition-transform duration-300 origin-left group-hover:scale-x-100"></div>
                         <span className="text-lg sm:text-xl font-extralight text-zinc-700">
-                            Generator
+                            AI
                         </span>
                     </Link>
                 </div>
 
                 {/* User Section with an integrated card feel */}
-                <div className="flex items-center gap-x-3 p-2.5 shadow-md rounded-md">
-                    <div className="flex flex-col text-right">
-                        <p className="text-sm font-semibold text-zinc-900">
-                            {user?.fullName || "User"}
-                        </p>
-                        <p className="text-xs text-zinc-500">Free Plan</p>{" "}
-                        {/* A nice touch! */}
+                <div className="flex flex-row items-center justify-between gap-10">
+                    <Link href="/history" className="hover:underline text-sm uppercase font-semibold">
+                        History
+                    </Link>
+                    <div className="flex items-center gap-x-3 p-2.5 shadow-md rounded-md">
+                        <div className="hidden lg:flex lg:items-center lg:gap-3">
+                            <div className="flex flex-col text-right">
+                                <p className="text-sm font-semibold text-zinc-900">
+                                    {user?.fullName || "User"}
+                                </p>
+                                <p className="text-xs text-zinc-500">
+                                    Free Plan
+                                </p>{" "}
+                                {/* A nice touch! */}
+                            </div>
+                            <div className="w-px h-8 bg-zinc-300"></div>
+                        </div>
+                        <UserButton
+                            appearance={{
+                                elements: {
+                                    userButtonAvatarBox: "w-10 h-10 shadow-sm",
+                                    userButtonPopoverCard:
+                                        "border border-zinc-200 shadow-lg",
+                                },
+                            }}
+                        />
                     </div>
-                    <div className="w-px h-8 bg-zinc-300"></div>
-                    <UserButton
-                        appearance={{
-                            elements: {
-                                userButtonAvatarBox: "w-10 h-10 shadow-sm",
-                                userButtonPopoverCard:
-                                    "border border-zinc-200 shadow-lg",
-                            },
-                        }}
-                    />
                 </div>
             </div>
         </header>

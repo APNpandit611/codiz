@@ -19,9 +19,10 @@ export type QuizData = {
 
 const generateQuiz = async (difficulty: string, language: string): Promise<QuizData> => {
     const prompt = `
-Generate a multiple-choice coding challenge based on the language provided and the difficulty level. 
+Generate a multiple-choice non-repetitive unique coding challenge based on the language provided and the difficulty level. 
 Respond with a **single valid JSON object only**. 
-No markdown fences, no extra text, no comments, no trailing commas. 
+No markdown fences, no extra text, no comments, no trailing commas.
+Only unique content every time. No same quiz questions. 
 All strings must be valid JSON strings (escape quotes and newlines). 
 The code snippet must be escaped correctly.
 Focus on common algorithm, data structure, or practical coding problem.
