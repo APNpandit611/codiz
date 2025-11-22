@@ -16,7 +16,7 @@ import {
     Send,
     XCircle,
 } from "lucide-react";
-import { Quiz } from "@/lib/generated/prisma/client";
+import { Quiz } from "@/app/generated/prisma/client";
 export type NewQuiz = Omit<Quiz, "id" | "createdAt" | "updatedAt">;
 
 // The component now manages its own state for interactivity

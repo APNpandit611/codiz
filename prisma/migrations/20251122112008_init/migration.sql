@@ -1,14 +1,18 @@
 /*
   Warnings:
 
+  - You are about to drop the column `correct_answer_index` on the `Quiz` table. All the data in the column will be lost.
   - The primary key for the `User` table will be changed. If it partially fails, the table could be left without primary key constraint.
+  - Added the required column `correctAnswerIndex` to the `Quiz` table without a default value. This is not possible if the table is not empty.
 
 */
 -- DropForeignKey
 ALTER TABLE "Quiz" DROP CONSTRAINT "Quiz_userId_fkey";
 
 -- AlterTable
-ALTER TABLE "Quiz" ALTER COLUMN "userId" SET DATA TYPE TEXT;
+ALTER TABLE "Quiz" DROP COLUMN "correct_answer_index",
+ADD COLUMN     "correctAnswerIndex" INTEGER NOT NULL,
+ALTER COLUMN "userId" SET DATA TYPE TEXT;
 
 -- AlterTable
 ALTER TABLE "User" DROP CONSTRAINT "User_pkey",
