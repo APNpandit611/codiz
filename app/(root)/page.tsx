@@ -28,7 +28,7 @@ type FormData = {
 };
 
 export default function Home() {
-    const user = useUser()
+    const { user } = useUser();
     const [quiz, setQuiz] = useState<QuizData | null>(null);
     const [formData, setFormData] = useState<FormData>({
         difficulty: "easy",
@@ -42,18 +42,22 @@ export default function Home() {
     const MAX: number = 30;
 
     useEffect(() => {
-        setIsClient(true);
-        const data = getDailyLimit();
-        setLimitData(data);
-        setRemaining(MAX - data.count);
-    }, []);
+        // const getLimit = async () => {
+        //     setIsClient(true);
+        //     const data = await getDailyLimit(user?.id);
+        //     setLimitData(data);
+        //     setRemaining(MAX - data.count);
+        // }
+        // getLimit()
+
+        if (user) setIsClient(true);
+    }, [user]);
 
     useEffect(() => {
         const userCreate = async () => {
             if (isClient) {
                 await createUser();
             }
-
         };
         userCreate();
     }, [isClient]);
@@ -75,8 +79,8 @@ export default function Home() {
                 formData.difficulty,
                 formData.language
             );
-            incrementDailyLimit();
-            const newData = getDailyLimit();
+            await incrementDailyLimit(user?.id);
+            const newData = await getDailyLimit(user?.id);
             setLimitData(newData);
             setRemaining(MAX - newData.count);
             setQuiz(generatedQuiz);
@@ -91,7 +95,6 @@ export default function Home() {
             setIsLoading(false);
         }
     };
-
 
     const handleGenerate = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -394,7 +397,6 @@ export default function Home() {
                     )}
                 </form>
 
-
                 {/* Quiz Component */}
                 <QuizComponent
                     quizData={quiz}
@@ -403,7 +405,7 @@ export default function Home() {
                     generateNextQuiz={generateQuizHandler}
                     difficulty={formData.difficulty}
                     language={formData.language}
-                    userId={user.user?.id || ""}
+                    userId={user?.id || ""}
                 />
             </main>
         </div>

@@ -1,39 +1,34 @@
-const STORAGE_KEY = "quiz_count_data";
+"use server"
+import { prisma } from "@/lib/prisma";
 
-export function getDailyLimit() {
-    if (typeof window === "undefined") {
-        // On server, return default
-        return { date: new Date().toDateString(), count: 0 };
-    }
+export async function getDailyLimit(userId:string | undefined) {
+    if (!userId) return {count: 0};
+
+    const user = await prisma.user.findUnique({
+        where: { id: userId }
+    });
 
     const today = new Date().toDateString();
-    const stored = localStorage.getItem(STORAGE_KEY);
-    
+    if (!user || !user.lastResetDate || user.lastResetDate.toDateString() !== today) {
+        await prisma.user.update({
+            where: { id: userId },
+            data: { lastResetDate: new Date(), clickCount: 0 }
+        });
 
-    if (!stored) {
-        const data = { date: today, count: 0 };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-        return data;
+        return { count: 0 };
     }
 
-    const data = JSON.parse(stored);
-
-    if (data.date !== today) {
-        const reset = { date: today, count: 0 };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(reset));
-        return reset;
-    }
-
-    return data;
+    return { count: user.clickCount ?? 0 };
 }
 
 
-export function incrementDailyLimit() {
-    if (typeof window === "undefined") return;
+export async function incrementDailyLimit(userId:string | undefined) {
+    if (!userId) return;
 
-    const data = getDailyLimit();
-    data.count += 1;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    await prisma.user.update({
+        where: { id: userId },
+        data: { clickCount: { increment: 1 } }
+    });
 }
 
 
