@@ -3,7 +3,6 @@ import { prisma } from "@/lib/prisma";
 
 export async function getDailyLimit(userId:string | undefined) {
     if (!userId) return {count: 0};
-
     const user = await prisma.user.findUnique({
         where: { id: userId }
     });

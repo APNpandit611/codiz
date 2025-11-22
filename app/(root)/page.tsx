@@ -7,7 +7,7 @@ import {
 } from "@/components/actions/quizLimit";
 import { useUser } from "@clerk/nextjs";
 import QuizComponent from "@/components/QuizComponent";
-import { createUser } from "@/components/actions/saveQuiz";
+import { createUser, getUserData } from "@/components/actions/saveQuiz";
 import {
     Code2,
     Sparkles,
@@ -21,6 +21,7 @@ import {
     AlertCircle,
     ChevronDown,
 } from "lucide-react";
+import { prisma } from "@/lib/prisma";
 
 type FormData = {
     difficulty: string;
@@ -49,8 +50,14 @@ export default function Home() {
         //     setRemaining(MAX - data.count);
         // }
         // getLimit()
+        const findUser = async () => {
+            const data = await getUserData(user?.id)
+            setLimitData({ count: data?.clickCount ?? 0})
+            setRemaining(MAX - (data?.clickCount ?? 0));
+            setIsClient(true)
+        };
+        findUser()
 
-        if (user) setIsClient(true);
     }, [user]);
 
     useEffect(() => {

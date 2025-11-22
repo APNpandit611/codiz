@@ -67,3 +67,16 @@ export async function saveQuiz(quizData: NewQuiz) {
         return { success: false, error: true };
     }
 }
+
+
+export async function getUserData(userId: string | undefined) {
+    if (!userId) return null;
+
+    return prisma.user.findUnique({
+        where: {id: userId},
+        select: {
+            clickCount: true,
+            lastResetDate: true
+        }
+    })
+}
