@@ -91,14 +91,15 @@ const QuizComponent = ({
                 userId: userId,
             };
             const result = await saveQuiz(quizDataNew);
+            router.refresh();
             if (result.success) {
                 toast("Quiz saved successfully!");
-                router.refresh();
             } else if (!result.success && !result.error) {
                 toast("Quiz already exists!");
             } else {
                 toast("Quiz saving failed!");
             }
+        
         } catch (error) {
             toast("Quiz saving Failed!");
             console.log(error);
@@ -279,7 +280,7 @@ const QuizComponent = ({
                         <button
                             onClick={handleSubmitAnswer}
                             disabled={saving || !userId}
-                            className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl font-semibold hover:from-indigo-700 hover:to-blue-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl disabled:shadow-none hover:-translate-y-0.5 disabled:translate-y-0 flex items-center gap-2"
+                            className="w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl font-semibold hover:from-indigo-700 hover:to-blue-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl disabled:shadow-none hover:-translate-y-0.5 disabled:translate-y-0 flex items-center justify-center gap-2"
                         >
                             <Send className="w-4 h-4" />
                             Submit Answer
@@ -287,9 +288,9 @@ const QuizComponent = ({
                     ) : (
                         <>
                             {isCorrect ? (
-                                <div className="w-full flex flex-row items-center justify-between gap-4">
+                                <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-200">
                                     <button
-                                        className="px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl font-semibold hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-2"
+                                        className="w-full px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white rounded-xl font-semibold hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2"
                                         onClick={generateNextQuiz}
                                     >
                                         <ArrowRight className="w-4 h-4" />
@@ -297,7 +298,7 @@ const QuizComponent = ({
                                     </button>
 
                                     <button
-                                        className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl font-semibold hover:from-indigo-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-2"
+                                        className=" w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-xl font-semibold hover:from-indigo-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2"
                                         onClick={handleQuizSave}
                                         disabled={saving}
                                     >
@@ -316,7 +317,7 @@ const QuizComponent = ({
                                 </div>
                             ) : (
                                 <button
-                                    className="px-6 py-3 bg-gradient-to-r from-slate-600 to-gray-700 text-white rounded-xl font-semibold hover:from-slate-700 hover:to-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center gap-2"
+                                    className="w-full px-6 py-3 bg-gradient-to-r from-slate-600 to-gray-700 text-white rounded-xl font-semibold hover:from-slate-700 hover:to-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2"
                                     onClick={handleTryAgain}
                                 >
                                     <RotateCcw className="w-4 h-4" />
