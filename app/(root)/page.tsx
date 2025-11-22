@@ -53,7 +53,7 @@ export default function Home() {
         const findUser = async () => {
             const data = await getUserData(user?.id)
             setLimitData({ count: data?.clickCount ?? 0})
-            setRemaining(MAX - (data?.clickCount ?? 0));
+            setRemaining(MAX - (data?.clickCount ?? 30));
             setIsClient(true)
         };
         findUser()
