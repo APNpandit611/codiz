@@ -19,10 +19,10 @@ export type QuizData = {
 
 const generateQuiz = async (difficulty: string, language: string): Promise<QuizData> => {
     const prompt = `
-Generate a multiple-choice non-repetitive unique coding challenge based on the language provided and the difficulty level. 
+Generate a multiple-choice unique coding challenge based on the language provided and the difficulty level. 
 Respond with a **single valid JSON object only**. 
 No markdown fences, no extra text, no comments, no trailing commas.
-Only unique content every time. No same quiz questions. 
+Only unique content every time. Avoid same questions, avoid similar code snippets
 All strings must be valid JSON strings (escape quotes and newlines). 
 The code snippet must be escaped correctly.
 Focus on common algorithm, data structure, or practical coding problem.
@@ -49,6 +49,8 @@ Rules:
 - Explanation must justify the correct answer and contrast the wrong ones.
 - Must be unique and non-repetitive.
 - Validate your JSON before outputting.
+- Avoid generating similar contents in a row
+- Randomly distribute the choices. Not every question generated should have choice 1 answer
 
 Return ONLY the final JSON object.
 `;
