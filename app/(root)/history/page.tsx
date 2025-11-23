@@ -7,7 +7,7 @@ const History = async ({searchParams}:{searchParams: Promise<{[key:string]:strin
   const {page, ...queryParams} = await searchParams
     const p = page ? parseInt(page) : 1
 
-  return <HistoryPage p={p}/>
+  return <HistoryPage p={p} queryParams={queryParams}/>
 }
 
 export default History

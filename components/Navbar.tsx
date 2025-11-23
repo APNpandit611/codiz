@@ -58,12 +58,12 @@ const Navbar = async () => {
                 </div>
 
                 {/* User Section with an integrated card feel */}
-                <div className="flex flex-row items-center justify-between gap-10">
+                <div className="flex flex-row items-center justify-between gap-7">
                     <Link href="/history" className="hover:underline text-sm uppercase font-semibold">
                         History
                     </Link>
-                    <div className="flex items-center gap-x-3 p-2.5 shadow-md rounded-md">
-                        <div className="hidden lg:flex lg:items-center lg:gap-3">
+                    <div className="flex items-center gap-x-3 md:p-2.5 shadow-md rounded-full md:rounded-md">
+                        <div className="hidden md:flex md:items-center md:gap-3">
                             <div className="flex flex-col text-right">
                                 <p className="text-sm font-semibold text-zinc-900">
                                     {user?.fullName || "User"}

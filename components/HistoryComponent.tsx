@@ -15,19 +15,66 @@ import {
 } from "lucide-react";
 import Pagination from "./Pagination";
 import { ITEM_PER_PAGE } from "@/lib/settings";
+import TableSearch from "./TableSearch";
+import { Prisma } from "@/app/generated/prisma/client";
 
-const HistoryComponent = async ({ p }: { p: number }) => {
+const HistoryComponent = async ({
+    p,
+    queryParams,
+}: {
+    p: number;
+    queryParams: { [key: string]: string | undefined };
+}) => {
+    const query: Prisma.QuizWhereInput = {};
+    console.log(queryParams);
+    if (queryParams) {
+        for (const [key, value] of Object.entries(queryParams)) {
+            if (value !== undefined) {
+                switch (key) {
+                    case "search":
+                        query.OR = [
+                            {
+                                question: {
+                                    contains: value,
+                                    mode: "insensitive",
+                                },
+                            },
+                            {
+                                codeSnippet: {
+                                    contains: value,
+                                    mode: "insensitive",
+                                },
+                            },
+                            {
+                                explanation: {
+                                    contains: value,
+                                    mode: "insensitive",
+                                },
+                            },
+                        ];
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+    }
     const [quizByUser, count] = await prisma.$transaction([
         prisma.quiz.findMany({
-            where: { userId: (await currentUser())?.id },
+            where: query,
             take: ITEM_PER_PAGE,
             skip: ITEM_PER_PAGE * (p - 1),
         }),
-        prisma.quiz.count(),
+        prisma.quiz.count({ where: query }),
     ]);
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-4">
+            <div className="max-w-6xl mx-auto py-4 mb-2 px-6 shadow-md flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <h1 className="text-2xl font-bold text-center">Quiz History</h1>
+                <TableSearch />
+            </div>
             <div className="rounded-md max-w-6xl mx-auto py-4 mb-2 px-6 shadow-md min-h-screen">
                 {quizByUser.length === 0 ? (
                     <p className="text-center text-gray-500">

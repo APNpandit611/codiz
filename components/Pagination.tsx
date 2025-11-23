@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 const Pagination = ({ page, count }: { page: number; count: number }) => {
     const router = useRouter();
 
+
     const changePage = (newPage: number) => {
         const params = new URLSearchParams(window.location.search);
         params.set("page", newPage.toString());
