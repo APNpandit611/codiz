@@ -13,11 +13,18 @@ import {
     LightbulbIcon,
     TrendingUp,
 } from "lucide-react";
+import Pagination from "./Pagination";
+import { ITEM_PER_PAGE } from "@/lib/settings";
 
-const HistoryComponent = async () => {
-    const quizByUser = await prisma.quiz.findMany({
-        where: { userId: (await currentUser())?.id },
-    });
+const HistoryComponent = async ({ p }: { p: number }) => {
+    const [quizByUser, count] = await prisma.$transaction([
+        prisma.quiz.findMany({
+            where: { userId: (await currentUser())?.id },
+            take: ITEM_PER_PAGE,
+            skip: ITEM_PER_PAGE * (p - 1),
+        }),
+        prisma.quiz.count(),
+    ]);
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 py-4">
@@ -205,6 +212,7 @@ const HistoryComponent = async () => {
                         </section>
                     ))
                 )}
+                <Pagination page={p} count={count} />
             </div>
         </div>
     );
