@@ -25,8 +25,10 @@ const HistoryComponent = async ({
     p: number;
     queryParams: { [key: string]: string | undefined };
 }) => {
-    const query: Prisma.QuizWhereInput = {};
-    console.log(queryParams);
+    const user = await currentUser()
+    const query: Prisma.QuizWhereInput = {
+        userId: user?.id
+    };
     if (queryParams) {
         for (const [key, value] of Object.entries(queryParams)) {
             if (value !== undefined) {
@@ -60,6 +62,7 @@ const HistoryComponent = async ({
             }
         }
     }
+
     const [quizByUser, count] = await prisma.$transaction([
         prisma.quiz.findMany({
             where: query,

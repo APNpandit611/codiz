@@ -21,7 +21,6 @@ import {
     AlertCircle,
     ChevronDown,
 } from "lucide-react";
-import { prisma } from "@/lib/prisma";
 
 type FormData = {
     difficulty: string;
