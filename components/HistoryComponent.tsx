@@ -17,6 +17,8 @@ import Pagination from "./Pagination";
 import { ITEM_PER_PAGE } from "@/lib/settings";
 import TableSearch from "./TableSearch";
 import { Prisma } from "@/app/generated/prisma/client";
+import { DeleteButton } from "./DeleteButton";
+import { SavedQuizComponent } from "./SavedQuizComponent";
 
 const HistoryComponent = async ({
     p,
@@ -25,9 +27,9 @@ const HistoryComponent = async ({
     p: number;
     queryParams: { [key: string]: string | undefined };
 }) => {
-    const user = await currentUser()
+    const user = await currentUser();
     const query: Prisma.QuizWhereInput = {
-        userId: user?.id
+        userId: user?.id,
     };
     if (queryParams) {
         for (const [key, value] of Object.entries(queryParams)) {
@@ -79,7 +81,7 @@ const HistoryComponent = async ({
                 <TableSearch />
             </div>
             <div className="rounded-md max-w-6xl mx-auto py-4 mb-2 px-6 shadow-md min-h-screen">
-                {quizByUser.length === 0 ? (
+                {/* {quizByUser.length === 0 ? (
                     <p className="text-center text-gray-500">
                         No quiz history found.
                     </p>
@@ -109,7 +111,6 @@ const HistoryComponent = async ({
 
                                     <AccordionContent className="pt-0 px-6 pb-6 bg-gradient-to-b from-white to-gray-50/30">
                                         <div className="space-y-6 mt-4">
-                                            {/* Code Snippet */}
                                             {item.codeSnippet && (
                                                 <div className="relative">
                                                     <div className="absolute -top-2.5 left-4 z-10 px-3 py-1 bg-gradient-to-r from-slate-800 to-slate-900 rounded-t-md shadow-sm">
@@ -143,7 +144,6 @@ const HistoryComponent = async ({
                                                 </div>
                                             )}
 
-                                            {/* Choices */}
                                             <div className="space-y-4">
                                                 <div className="flex items-center gap-3 mb-3">
                                                     <div className="w-1 h-5 bg-gradient-to-b from-blue-500 to-indigo-600 rounded-full"></div>
@@ -200,7 +200,6 @@ const HistoryComponent = async ({
                                                 )}
                                             </div>
 
-                                            {/* Explanation */}
                                             {item.explanation && (
                                                 <div className="relative group">
                                                     <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-sm"></div>
@@ -209,11 +208,28 @@ const HistoryComponent = async ({
                                                             <div className="p-2.5 rounded-xl bg-gradient-to-br from-yellow-400 to-orange-500 text-white shadow-md">
                                                                 <LightbulbIcon className="w-5 h-5" />
                                                             </div>
-                                                            <div className="flex-1">
-                                                                <h4 className="font-bold text-gray-800 mb-2 flex items-center gap-2">
-                                                                    Explanation
-                                                                    <div className="w-8 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full"></div>
-                                                                </h4>
+                                                            <div className="flex flex-col gap-1">
+                                                                <div className="flex flex-row items-center justify-between">
+                                                                    <h4 className="font-bold text-gray-800 mb-2 flex items-center gap-2">
+                                                                        Explanation
+                                                                        <div className="w-8 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full"></div>
+                                                                    </h4>
+                                                                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-lg text-xs text-gray-500">
+                                                                        <CalendarIcon className="w-4 h-4" />
+                                                                        <span className="font-medium">
+                                                                            {new Date(
+                                                                                item.createdAt
+                                                                            ).toLocaleDateString(
+                                                                                "en-US",
+                                                                                {
+                                                                                    month: "short",
+                                                                                    day: "numeric",
+                                                                                    year: "numeric",
+                                                                                }
+                                                                            )}
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
                                                                 <p className="text-gray-700 leading-relaxed">
                                                                     {
                                                                         item.explanation
@@ -225,25 +241,7 @@ const HistoryComponent = async ({
                                                 </div>
                                             )}
 
-                                            {/* Metadata */}
                                             <div className="flex items-center justify-between pt-5 border-t border-gray-200">
-                                                <div className="flex items-center gap-3 text-sm text-gray-500">
-                                                    <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-lg">
-                                                        <CalendarIcon className="w-4 h-4" />
-                                                        <span className="font-medium">
-                                                            {new Date(
-                                                                item.createdAt
-                                                            ).toLocaleDateString(
-                                                                "en-US",
-                                                                {
-                                                                    month: "short",
-                                                                    day: "numeric",
-                                                                    year: "numeric",
-                                                                }
-                                                            )}
-                                                        </span>
-                                                    </div>
-                                                </div>
                                                 <div className="flex gap-3">
                                                     <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border border-blue-200/50">
                                                         <TrendingUp className="w-3.5 h-3.5" />
@@ -254,6 +252,8 @@ const HistoryComponent = async ({
                                                         {item.language}
                                                     </span>
                                                 </div>
+
+                                                <DeleteButton quizId={item.id}/>
                                             </div>
                                         </div>
                                     </AccordionContent>
@@ -261,7 +261,9 @@ const HistoryComponent = async ({
                             </Accordion>
                         </section>
                     ))
-                )}
+                )} */}
+
+                <SavedQuizComponent quizByUser={quizByUser}/>
                 <Pagination page={p} count={count} />
             </div>
         </div>

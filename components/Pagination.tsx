@@ -5,13 +5,30 @@ import { useRouter } from "next/navigation";
 const Pagination = ({ page, count }: { page: number; count: number }) => {
     const router = useRouter();
 
-
     const changePage = (newPage: number) => {
         const params = new URLSearchParams(window.location.search);
         params.set("page", newPage.toString());
         router.push(`${window.location.pathname}?${params}`);
     };
     
+    const getPageNumbers = (current: number, total: number) => {
+        const pages: number[] = [];
+        
+        let start = Math.max(1, current - 1);
+        let end = Math.min(total, current + 1);
+        console.log(start, end)
+        
+        if (current === 1) end = Math.min(total, 3);
+        if (current === total) start = Math.max(1, total - 2);
+        
+        console.log(start, end)
+        for (let i = start; i <= end; i++) pages.push(i);
+        
+        return pages;
+    };
+    
+    const totalPages = Math.ceil(count / ITEM_PER_PAGE);
+    const pagesToShow = getPageNumbers(page, totalPages);
     const hasPrev = ITEM_PER_PAGE * (page - 1) > 0;
     const hasNext = ITEM_PER_PAGE * (page - 1) + ITEM_PER_PAGE < count;
     return (
@@ -23,8 +40,9 @@ const Pagination = ({ page, count }: { page: number; count: number }) => {
             >
                 Prev
             </button>
+
             <div className="flex items-center justify-center gap-3 text-sm">
-                {Array.from(
+                {/* {Array.from(
                     { length: Math.ceil(count / ITEM_PER_PAGE) },
                     (_, i) => {
                         const pageIndex = i + 1;
@@ -40,16 +58,33 @@ const Pagination = ({ page, count }: { page: number; count: number }) => {
                             </button>
                         );
                     }
-                )}
+                )} */}
+
+                {pagesToShow.map((p) => (
+                    <button
+                        key={p}
+                        onClick={() => changePage(p)}
+                        className={`px-2 py-1 rounded-sm text-white 
+                ${
+                    p === page
+                        ? "bg-gradient-to-r from-indigo-600 to-blue-600"
+                        : "bg-slate-300"
+                }`}
+                    >
+                        {p}
+                    </button>
+                ))}
             </div>
 
-            <button
-                disabled={!hasNext}
-                onClick={() => changePage(page + 1)}
-                className={`py-2 px-4 rounded-md bg-slate-200 text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer`}
-            >
-                Next
-            </button>
+            {page < count && (
+                <button
+                    disabled={!hasNext}
+                    onClick={() => changePage(page + 1)}
+                    className={`py-2 px-4 rounded-md bg-slate-300 text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer`}
+                >
+                    Next
+                </button>
+            )}
         </div>
     );
 };

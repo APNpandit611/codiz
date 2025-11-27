@@ -80,3 +80,20 @@ export async function getUserData(userId: string | undefined) {
         }
     })
 }
+
+export async function deleteQuiz(quizId:number) {
+    try {
+        const user = await currentUser()
+        if(!user) return null
+        await prisma.quiz.delete({
+            where: {
+                userId: user.id,
+                id: quizId
+            }
+        })
+        return { success: true, error: false}
+    } catch (error) {
+        console.log(error)
+        return { success: true, error: false}
+    }
+}
