@@ -16,7 +16,6 @@ const Pagination = ({ page, count }: { page: number; count: number }) => {
         
         let start = Math.max(1, current - 1);
         let end = Math.min(total, current + 1);
-        console.log(start, end)
         
         if (current === 1) end = Math.min(total, 3);
         if (current === total) start = Math.max(1, total - 2);
