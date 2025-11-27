@@ -20,7 +20,6 @@ const Pagination = ({ page, count }: { page: number; count: number }) => {
         if (current === 1) end = Math.min(total, 3);
         if (current === total) start = Math.max(1, total - 2);
         
-        console.log(start, end)
         for (let i = start; i <= end; i++) pages.push(i);
         
         return pages;
