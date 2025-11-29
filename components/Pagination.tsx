@@ -4,27 +4,28 @@ import { useRouter } from "next/navigation";
 
 const Pagination = ({ page, count }: { page: number; count: number }) => {
     const router = useRouter();
-
+    page = page ?? 1;
+    count = count ?? 1;
     const changePage = (newPage: number) => {
         const params = new URLSearchParams(window.location.search);
         params.set("page", newPage.toString());
         router.push(`${window.location.pathname}?${params}`);
     };
-    
+
     const getPageNumbers = (current: number, total: number) => {
         const pages: number[] = [];
-        
+
         let start = Math.max(1, current - 1);
         let end = Math.min(total, current + 1);
-        
+
         if (current === 1) end = Math.min(total, 3);
         if (current === total) start = Math.max(1, total - 2);
-        
+
         for (let i = start; i <= end; i++) pages.push(i);
-        
+
         return pages;
     };
-    
+
     const totalPages = Math.ceil(count / ITEM_PER_PAGE);
     const pagesToShow = getPageNumbers(page, totalPages);
     const hasPrev = ITEM_PER_PAGE * (page - 1) > 0;
