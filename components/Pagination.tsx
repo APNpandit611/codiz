@@ -2,7 +2,13 @@
 import { ITEM_PER_PAGE } from "@/lib/settings";
 import { useRouter } from "next/navigation";
 
-const Pagination = ({ page, count }: { page: number; count: number }) => {
+const Pagination = ({
+    page,
+    count,
+}: {
+    page: number | undefined;
+    count: number | undefined;
+}) => {
     const router = useRouter();
     page = page ?? 1;
     count = count ?? 1;
@@ -62,28 +68,26 @@ const Pagination = ({ page, count }: { page: number; count: number }) => {
                 {pagesToShow.map((p) => (
                     <button
                         key={p}
-                        onClick={() => changePage(p)}
                         className={`px-2 py-1 rounded-sm text-white 
                 ${
                     p === page
                         ? "bg-gradient-to-r from-indigo-600 to-blue-600"
                         : "bg-slate-300"
-                }`}
+                } cursor-pointer`}
+                        onClick={() => changePage(p)}
                     >
                         {p}
                     </button>
                 ))}
             </div>
 
-            {page < count && (
-                <button
-                    disabled={!hasNext}
-                    onClick={() => changePage(page + 1)}
-                    className={`py-2 px-4 rounded-md bg-slate-300 text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer`}
-                >
-                    Next
-                </button>
-            )}
+            <button
+                disabled={!hasNext}
+                onClick={() => changePage(page + 1)}
+                className={`py-2 px-4 rounded-md bg-slate-300 text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer`}
+            >
+                Next
+            </button>
         </div>
     );
 };

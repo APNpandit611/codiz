@@ -7,7 +7,7 @@ import {
 } from "@/components/actions/quizLimit";
 import { useUser } from "@clerk/nextjs";
 import QuizComponent from "@/components/QuizComponent";
-import { createUser, getUserData } from "@/components/actions/saveQuiz";
+import { createUser } from "@/components/actions/saveQuiz";
 import {
     Code2,
     Sparkles,
@@ -27,6 +27,8 @@ type FormData = {
     language: string;
 };
 
+const MAX: number = 30;
+
 export default function Home() {
     const { user } = useUser();
     const [quiz, setQuiz] = useState<QuizData | null>(null);
@@ -36,27 +38,19 @@ export default function Home() {
     });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [remaining, setRemaining] = useState<number | null>(null);
+    const [remaining, setRemaining] = useState<number>(MAX);
     const [isClient, setIsClient] = useState(false);
-    const [limitData, setLimitData] = useState({ count: 0 });
-    const MAX: number = 30;
+    // const [limitData, setLimitData] = useState({ count: 0 });
 
     useEffect(() => {
-        // const getLimit = async () => {
-        //     setIsClient(true);
-        //     const data = await getDailyLimit(user?.id);
-        //     setLimitData(data);
-        //     setRemaining(MAX - data.count);
-        // }
-        // getLimit()
-        const findUser = async () => {
-            const data = await getUserData(user?.id)
-            setLimitData({ count: data?.clickCount ?? 0})
-            setRemaining(MAX - (data?.clickCount ?? 30));
-            setIsClient(true)
+        if (!user?.id) return;
+        const fetchLimit = async () => {
+            const data = await getDailyLimit(user?.id);
+            // setLimitData({ count: data?.clickCount ?? 0 });
+            setRemaining(MAX - (data?.count ?? 0));
+            setIsClient(true);
         };
-        findUser()
-
+        fetchLimit();
     }, [user]);
 
     useEffect(() => {
@@ -72,26 +66,59 @@ export default function Home() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    // const generateQuizHandler = async () => {
+    //     if (limitData.count >= MAX) {
+    //         setError("You reached today's limit.");
+    //         return;
+    //     }
+
+    //     setIsLoading(true);
+    //     setError(null);
+    //     try {
+    //         const generatedQuiz = await generateQuiz(
+    //             formData.difficulty,
+    //             formData.language
+    //         );
+    //         await incrementDailyLimit(user?.id);
+    //         const newData = await getDailyLimit(user?.id);
+    //         setLimitData(newData);
+    //         setRemaining(MAX - newData.count);
+    //         setQuiz(generatedQuiz);
+    //     } catch (err) {
+    //         console.log(err);
+    //         setError(
+    //             err instanceof Error
+    //                 ? err.message
+    //                 : "An unknown error occurred."
+    //         );
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
+
     const generateQuizHandler = async () => {
-        if (limitData.count >= MAX) {
+        if (!user?.id) return;
+        if (remaining <= 0) {
             setError("You reached today's limit.");
             return;
         }
 
         setIsLoading(true);
         setError(null);
+
         try {
             const generatedQuiz = await generateQuiz(
                 formData.difficulty,
                 formData.language
             );
-            await incrementDailyLimit(user?.id);
-            const newData = await getDailyLimit(user?.id);
-            setLimitData(newData);
-            setRemaining(MAX - newData.count);
+
+            await incrementDailyLimit(user.id);
+            const data = await getDailyLimit(user.id); // refresh limit
+            setRemaining(MAX - (data.count ?? 0));
+
             setQuiz(generatedQuiz);
         } catch (err) {
-            console.log(err);
+            console.error(err);
             setError(
                 err instanceof Error
                     ? err.message
@@ -228,7 +255,7 @@ export default function Home() {
                                 <BarChart3 className="w-5 h-5" />
                             </div>
                             <span className="text-2xl font-bold text-gray-900">
-                                {limitData.count}
+                                {MAX - remaining}
                             </span>
                         </div>
                         <p className="text-gray-600 text-sm">

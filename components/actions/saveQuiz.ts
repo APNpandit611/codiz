@@ -69,17 +69,30 @@ export async function saveQuiz(quizData: NewQuiz) {
 }
 
 
-export async function getUserData(userId: string | undefined) {
-    if (!userId) return null;
+// export async function getUserData(userId: string | undefined) {
+//     const user = await prisma.user.findUnique({ where: {id: userId}})
+//     if (!userId) return null;
 
-    return prisma.user.findUnique({
-        where: {id: userId},
-        select: {
-            clickCount: true,
-            lastResetDate: true
-        }
-    })
-}
+//     const now = new Date()
+//     const lastReset = new Date(user.lastResetDate)
+//     const hoursSinceReset = (now.getTime() - lastReset.getTime()) / 1000 / 3600
+
+//     if (hoursSinceReset >= 24) {
+//         await prisma.user.update({
+//             where: {id: userId},
+//             data: { clickCount: 0, lastResetDate: now}
+//         })
+//         return { clickCount: 0}
+//     }
+
+//     return prisma.user.findUnique({
+//         where: {id: userId},
+//         select: {
+//             clickCount: true,
+//             lastResetDate: true
+//         }
+//     })
+// }
 
 export async function deleteQuiz(quizId:number) {
     try {
