@@ -21,6 +21,7 @@ import {
     AlertCircle,
     ChevronDown,
 } from "lucide-react";
+import { auth } from "@clerk/nextjs/server";
 
 type FormData = {
     difficulty: string;
@@ -40,7 +41,20 @@ export default function Home() {
     const [error, setError] = useState<string | null>(null);
     const [remaining, setRemaining] = useState<number>(MAX);
     const [isClient, setIsClient] = useState(false);
-    // const [limitData, setLimitData] = useState({ count: 0 });
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+     useEffect(() => {
+        const userCreate = async () => {
+            if (isClient) {
+                await createUser();
+            }
+        };
+        userCreate();
+    }, [isClient]);
+
 
     useEffect(() => {
         if (!user?.id) return;
@@ -52,15 +66,6 @@ export default function Home() {
         };
         fetchLimit();
     }, [user]);
-
-    useEffect(() => {
-        const userCreate = async () => {
-            if (isClient) {
-                await createUser();
-            }
-        };
-        userCreate();
-    }, [isClient]);
 
     const handleFormChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
