@@ -27,7 +27,7 @@ Codiz is built using a modern and powerful technology stack:
 | **Database/ORM**| Prisma |
 | **Deployment**| Vercel |
 
-## 📸 Screenshots
+## 📸 SCREENSHOT 1: Main Landing Page Interface
 <kbd>
     <img src="public/codiz1.png" alt="Codiz Dashboard" />
 </kbd>
@@ -35,6 +35,7 @@ Codiz is built using a modern and powerful technology stack:
 <kbd>
     <img src="public/codiz2.png" alt="Codiz Generate" />
 </kbd>
+## 📸 SCREENSHOT 1: Main Landing Quiz Interface
 
 <kbd>
     <img src="public/codiz3.png" alt="Codiz wrong chocie quiz" />
@@ -43,7 +44,3 @@ Codiz is built using a modern and powerful technology stack:
 <kbd>
     <img src="public/codiz4.png" alt="Codiz right choice quiz" />
 </kbd>
-
-**[INSERT SCREENSHOT 1: Main Landing Page/Chat Interface]**
-
-**[INSERT SCREENSHOT 2: Example of AI Generated Code Output]**
