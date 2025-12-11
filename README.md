@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Codiz 🤖🧠 (AI Code Quiz Generator)
 
-## Getting Started
+**Codiz** is a focused **AI-powered quiz generation platform** designed for developers and learners. It helps you test your knowledge by instantly creating customized quizzes based on your chosen programming language and desired difficulty level.
 
-First, run the development server:
+## 🚀 Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Experience the application in real-time:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[**ai-codiz.vercel.app**](https://ai-codiz.vercel.app/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* **Custom Quiz Generation:** Generates quizzes on demand based on specific programming languages (e.g., Python, JavaScript) and difficulty levels (Easy, Medium, Hard).
+* **Quiz History & Saving:** Users can save their favorite generated quizzes and easily review their entire quiz history.
+* **Daily Quota Management:** A limit of **30 quiz generations per user per day** ensures fair usage of the underlying AI service.
+* **Interactive Interface:** Clear feedback on correct and incorrect answers during the quiz.
+* **Full-Stack Architecture:** Reliable and scalable performance thanks to Next.js and Prisma.
 
-## Learn More
+## 💻 Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+Codiz is built using a modern and powerful technology stack:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Category | Technology |
+| :--- | :--- |
+| **Framework** | Next.js (App Router) |
+| **Language** | TypeScript |
+| **Styling** | Tailwind CSS |
+| **Database/ORM**| Prisma |
+| **Deployment**| Vercel |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📸 Screenshots
 
-## Deploy on Vercel
+### Main Dashboard and Generation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The main dashboard where users select quiz parameters and the view showing a generated quiz.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<kbd>
+    <img src="public/codiz1.png" alt="Codiz Dashboard" />
+</kbd>
+
+<kbd>
+    <img src="public/codiz2.png" alt="Codiz Generate" />
+</kbd>
+
+### Interactive Quiz Interface
+
+Views demonstrating the interactive feedback when a user selects a correct or incorrect answer.
+
+<kbd>
+    <img src="public/codiz3.png" alt="Codiz Wrong Choice Quiz" />
+</kbd>
+
+<kbd>
+    <img src="public/codiz4.png" alt="Codiz Right Choice Quiz" />
+</kbd>
