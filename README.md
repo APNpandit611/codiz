@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Codiz 🤖💡
 
-## Getting Started
+**Codiz** is an **AI-powered code assistance platform** designed to streamline development workflows and enhance code efficiency. Built as a modern full-stack web application, Codiz helps developers generate, refine, and understand code quickly and easily.
 
-First, run the development server:
+## 🚀 Live Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Experience the application in real-time:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[**ai-codiz.vercel.app**](https://ai-codiz.vercel.app/)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Key Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* **Intelligent Code Generation:** Instantly generate code snippets and solutions using cutting-edge AI.
+* **[Insert Feature 2]:** E.g., Interactive code chat, syntax highlighting, or dark mode support.
+* **[Insert Feature 3]:** E.g., User authentication, persistent chat history, or specific language support.
+* **Full-Stack Architecture:** Reliable and scalable performance thanks to Next.js and Prisma.
 
-## Learn More
+## 💻 Tech Stack
 
-To learn more about Next.js, take a look at the following resources:
+Codiz is built using a modern and powerful technology stack:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Category | Technology |
+| :--- | :--- |
+| **Framework** | Next.js (App Router) |
+| **Language** | TypeScript |
+| **Styling** | Tailwind CSS |
+| **Database/ORM**| Prisma |
+| **Deployment**| Vercel |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📸 Screenshots
+<kbd>
+    <img src="public/codiz1.png" alt="Codiz Dashboard" />
+</kbd>
 
-## Deploy on Vercel
+<kbd>
+    <img src="public/codiz2.png" alt="Codiz Generate" />
+</kbd>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<kbd>
+    <img src="public/codiz3.png" alt="Codiz wrong chocie quiz" />
+</kbd>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<kbd>
+    <img src="public/codiz4.png" alt="Codiz right choice quiz" />
+</kbd>
+
+**[INSERT SCREENSHOT 1: Main Landing Page/Chat Interface]**
+
+**[INSERT SCREENSHOT 2: Example of AI Generated Code Output]**
