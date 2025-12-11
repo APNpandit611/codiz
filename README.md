@@ -1,6 +1,6 @@
-# Codiz 🤖💡
+# Codiz 🤖🧠 (AI Code Quiz Generator)
 
-**Codiz** is an **AI-powered code assistance platform** designed to streamline development workflows and enhance code efficiency. Built as a modern full-stack web application, Codiz helps developers generate, refine, and understand code quickly and easily.
+**Codiz** is a focused **AI-powered quiz generation platform** designed for developers and learners. It helps you test your knowledge by instantly creating customized quizzes based on your chosen programming language and desired difficulty level.
 
 ## 🚀 Live Demo
 
@@ -10,9 +10,10 @@ Experience the application in real-time:
 
 ## ✨ Key Features
 
-* **Intelligent Code Generation:** Instantly generate code snippets and solutions using cutting-edge AI.
-* **[Insert Feature 2]:** E.g., Interactive code chat, syntax highlighting, or dark mode support.
-* **[Insert Feature 3]:** E.g., User authentication, persistent chat history, or specific language support.
+* **Custom Quiz Generation:** Generates quizzes on demand based on specific programming languages (e.g., Python, JavaScript) and difficulty levels (Easy, Medium, Hard).
+* **Quiz History & Saving:** Users can save their favorite generated quizzes and easily review their entire quiz history.
+* **Daily Quota Management:** A limit of **30 quiz generations per user per day** ensures fair usage of the underlying AI service.
+* **Interactive Interface:** Clear feedback on correct and incorrect answers during the quiz.
 * **Full-Stack Architecture:** Reliable and scalable performance thanks to Next.js and Prisma.
 
 ## 💻 Tech Stack
@@ -27,7 +28,12 @@ Codiz is built using a modern and powerful technology stack:
 | **Database/ORM**| Prisma |
 | **Deployment**| Vercel |
 
-## 📸 SCREENSHOT 1: Main Landing Page Interface
+## 📸 Screenshots
+
+### Main Dashboard and Generation
+
+The main dashboard where users select quiz parameters and the view showing a generated quiz.
+
 <kbd>
     <img src="public/codiz1.png" alt="Codiz Dashboard" />
 </kbd>
@@ -35,12 +41,15 @@ Codiz is built using a modern and powerful technology stack:
 <kbd>
     <img src="public/codiz2.png" alt="Codiz Generate" />
 </kbd>
-## 📸 SCREENSHOT 1: Main Landing Quiz Interface
+
+### Interactive Quiz Interface
+
+Views demonstrating the interactive feedback when a user selects a correct or incorrect answer.
 
 <kbd>
-    <img src="public/codiz3.png" alt="Codiz wrong chocie quiz" />
+    <img src="public/codiz3.png" alt="Codiz Wrong Choice Quiz" />
 </kbd>
 
 <kbd>
-    <img src="public/codiz4.png" alt="Codiz right choice quiz" />
+    <img src="public/codiz4.png" alt="Codiz Right Choice Quiz" />
 </kbd>
