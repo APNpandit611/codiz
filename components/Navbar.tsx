@@ -78,7 +78,7 @@ const Navbar = async () => {
                         <UserButton
                             appearance={{
                                 elements: {
-                                    userButtonAvatarBox: "w-10 h-10 shadow-sm",
+                                    userButtonAvatarBox: "!w-10 !h-10 shadow-sm",
                                     userButtonPopoverCard:
                                         "border border-zinc-200 shadow-lg",
                                 },
