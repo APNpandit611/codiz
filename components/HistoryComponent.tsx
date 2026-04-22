@@ -70,7 +70,7 @@ const HistoryComponent = async ({
             where: query,
             take: ITEM_PER_PAGE,
             skip: ITEM_PER_PAGE * (p - 1),
-            orderBy: {createdAt: 'asc'}
+            orderBy: {createdAt: 'desc'}
         }),
         prisma.quiz.count({ where: query }),
     ]);
