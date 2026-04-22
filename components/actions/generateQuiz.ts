@@ -57,7 +57,7 @@ Return ONLY the final JSON object.
 
     try {
         const completion = await openai.chat.completions.create({
-            model: "kwaipilot/kat-coder-pro",
+            model: "kwaipilot/kat-coder-pro-v2",
             messages: [{ role: "user", content: prompt }],
         });
 
